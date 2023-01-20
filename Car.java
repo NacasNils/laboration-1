@@ -20,6 +20,14 @@ public abstract class Car implements Movable {
     public abstract void incrementSpeed(double amount);
     public abstract void decrementSpeed(double amount);
 
+    Car(String name, Color col, int power, int nDoors) {
+        this.modelName = name;
+        this.color = col;
+        this.enginePower = power;
+        this.nrDoors = nDoors;
+        this.enginePower = 0;
+    }
+
     public void move() {
         switch (direction) {
             case UP: pos.y--; break;
