@@ -1,5 +1,7 @@
 import java.awt.*;
-
+/**
+* Class Car is an abstract class that a specific car should inherit and use
+*/
 public abstract class Car implements Movable {
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
@@ -28,6 +30,11 @@ public abstract class Car implements Movable {
         this.enginePower = 0;
     }
 
+    /**
+    * Moves the car depending on the instance variable currentSpeed,
+    * towards the current direction that the car is facing.
+    * @throws Error if direction is unknown
+    */
     public void move() {
         switch (direction) {
             case UP: pos.y-=currentSpeed; break;
@@ -39,6 +46,11 @@ public abstract class Car implements Movable {
         }
     }
 
+    /**
+    * Turns the car depending on the instance variable direction,
+    * towards a direction that is the natural left of the former one.
+    * @throws Error if direction is unknown
+    */
     public void turnLeft() {
         switch (direction) {
             case UP: direction = Dir.LEFT; break;
@@ -50,6 +62,11 @@ public abstract class Car implements Movable {
         }
     }
 
+    /**
+    * Turns the car depending on the instance variable direction,
+    * towards a direction that is the natural right of the former one.
+    * @throws Error if direction is unknown
+    */
     public void turnRight() {
         switch (direction) {
             case UP: direction = Dir.RIGHT; break;
@@ -61,30 +78,58 @@ public abstract class Car implements Movable {
         }
     }
 
-    
+    /**
+    * Returns an int describing the number of doors on the car 
+    * @return an int
+    */
     public int getNrDoors() {
         return nrDoors;
     }
+
+    /**
+    * Returns a double describing the amount of engine power this car has
+    * @return a double
+    */
     public double getEnginePower() {
         return enginePower;
     }
 
+    /**
+    * Returns a double describing the current speed this car has
+    * @return a double
+    */
     public double getCurrentSpeed() {
         return currentSpeed;
     }
 
+    /**
+    * Returns the color this car has
+    * @return      the color of this car
+    * @see         Color
+    */
     public Color getColor() {
         return color;
     }
 
+    /**
+    * Returns the color this car has
+    * @param  clr  the new color
+    * @see         Color
+    */
     public void setColor(Color clr) {
 	    color = clr;
     }
 
+    /**
+    * Starts the engine and sets the speed to 0.1
+    */
     public void startEngine() {
 	    currentSpeed = 0.1;
     }
 
+    /**
+    * Starts the engine and sets the speed to 0
+    */
     public void stopEngine() {
 	    currentSpeed = 0;
     }
