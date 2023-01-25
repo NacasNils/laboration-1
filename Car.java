@@ -41,7 +41,7 @@ public abstract class Car implements Movable {
         this.color = col;
         this.enginePower = power;
         this.nrDoors = nDoors;
-        this.enginePower = 0;
+        this.currentSpeed = 0;
     }
 
     /**
@@ -146,11 +146,17 @@ public abstract class Car implements Movable {
     
     // TODO fix this method according to lab pm
     public void gas(double amount) {
+        amount = clamp(amount, 0, 1);
         incrementSpeed(amount);
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount) {
+        amount = clamp(amount, 0, 1);
         decrementSpeed(amount);
+    }
+
+    public static double clamp(double val, double min, double max) {
+        return Math.max(min, Math.min(max, val));
     }
 }
