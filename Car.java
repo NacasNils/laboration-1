@@ -1,13 +1,18 @@
 import java.awt.*;
 /**
-* Class Car is an abstract class that a specific car should inherit and use
+* Class Car is an abstract class that a specific car should inherit from
 */
 public abstract class Car implements Movable {
-    protected int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
-    protected Color color; // Color of the car
-    protected String modelName; // The car model name
+    /** Number of doors on the car */
+    protected int nrDoors;
+    /** Engine power of the car */
+    protected double enginePower;
+    /** The current speed of the car */
+    protected double currentSpeed;
+    /** Color of the car */
+    protected Color color;
+    /** The car model name */
+    protected String modelName;
 
     enum Dir {
         UP,
@@ -16,10 +21,18 @@ public abstract class Car implements Movable {
         RIGHT
     }
 
-    private Point pos;
-    private Dir direction;
+    private Point currentpos;
+    private Dir currentDir;
 
+    /**
+    * Increments the speed
+    * @param  amount  the amount to increment the speed with
+    */
     public abstract void incrementSpeed(double amount);
+    /**
+    * Decrements the speed
+    * @param  amount  the amount to decrement the speed with
+    */
     public abstract void decrementSpeed(double amount);
 
     Car(String name, Color col, int power, int nDoors) {
@@ -32,49 +45,49 @@ public abstract class Car implements Movable {
 
     /**
     * Moves the car depending on the instance variable currentSpeed,
-    * towards the current direction that the car is facing.
-    * @throws Error if direction is unknown
+    * towards the current currentDir that the car is facing.
+    * @throws Error if currentDir is unknown
     */
     public void move() {
-        switch (direction) {
-            case UP: pos.y-=currentSpeed; break;
-            case DOWN: pos.y+=currentSpeed; break;
-            case LEFT: pos.x-=currentSpeed; break;
-            case RIGHT: pos.x+=currentSpeed; break;
+        switch (currentDir) {
+            case UP: currentpos.y-=currentSpeed; break;
+            case DOWN: currentpos.y+=currentSpeed; break;
+            case LEFT: currentpos.x-=currentSpeed; break;
+            case RIGHT: currentpos.x+=currentSpeed; break;
             default:
-                throw new Error("Unknown direction!");
+                throw new Error("Unknown currentDir!");
         }
     }
 
     /**
-    * Turns the car depending on the instance variable direction,
-    * towards a direction that is the natural left of the former one.
-    * @throws Error if direction is unknown
+    * Turns the car depending on the instance variable currentDir,
+    * towards a currentDir that is the natural left of the former one.
+    * @throws Error if currentDir is unknown
     */
     public void turnLeft() {
-        switch (direction) {
-            case UP: direction = Dir.LEFT; break;
-            case DOWN: direction = Dir.RIGHT; break;
-            case LEFT: direction = Dir.DOWN; break;
-            case RIGHT: direction = Dir.UP; break;
+        switch (currentDir) {
+            case UP: currentDir = Dir.LEFT; break;
+            case DOWN: currentDir = Dir.RIGHT; break;
+            case LEFT: currentDir = Dir.DOWN; break;
+            case RIGHT: currentDir = Dir.UP; break;
             default:
-                throw new Error("Unknown direction!");
+                throw new Error("Unknown currentDir!");
         }
     }
 
     /**
-    * Turns the car depending on the instance variable direction,
-    * towards a direction that is the natural right of the former one.
-    * @throws Error if direction is unknown
+    * Turns the car depending on the instance variable currentDir,
+    * towards a currentDir that is the natural right of the former one.
+    * @throws Error if currentDir is unknown
     */
     public void turnRight() {
-        switch (direction) {
-            case UP: direction = Dir.RIGHT; break;
-            case DOWN: direction = Dir.LEFT; break;
-            case LEFT: direction = Dir.UP; break;
-            case RIGHT: direction = Dir.DOWN; break;
+        switch (currentDir) {
+            case UP: currentDir = Dir.RIGHT; break;
+            case DOWN: currentDir = Dir.LEFT; break;
+            case LEFT: currentDir = Dir.UP; break;
+            case RIGHT: currentDir = Dir.DOWN; break;
             default:
-                throw new Error("Unknown direction!");
+                throw new Error("Unknown currentDir!");
         }
     }
 
@@ -120,16 +133,12 @@ public abstract class Car implements Movable {
 	    color = clr;
     }
 
-    /**
-    * Starts the engine and sets the speed to 0.1
-    */
+    /** Starts the engine and sets the speed to 0.1 */
     public void startEngine() {
 	    currentSpeed = 0.1;
     }
 
-    /**
-    * Starts the engine and sets the speed to 0
-    */
+    /** Starts the engine and sets the speed to 0 */
     public void stopEngine() {
 	    currentSpeed = 0;
     }
