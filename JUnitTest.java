@@ -25,4 +25,12 @@ public class JUnitTest {
         car1.setTurboOn();
         assertEquals(car1.getTurbo(), true);
     }
+
+    @Test
+    public void test_turbo() {
+        Saab95 car1 = new Saab95();
+        assertEquals(car1.getTurbo(), false);
+        car1.setTurboOn();
+        assertEquals(car1.getTurbo(), true);
+    }
 }
