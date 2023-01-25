@@ -1,6 +1,10 @@
 import java.awt.*;
 
+/**
+* A specific car Volvo 240, inherits from the class Car
+*/
 public class Volvo240 extends Car {
+    /** An instance variable descibing the trim factor */
     public final static double trimFactor = 1.25;
     
     public Volvo240() {

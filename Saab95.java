@@ -1,5 +1,8 @@
 import java.awt.*;
 
+/**
+* A specific car Saab 95, inherits from the class Car
+*/
 public class Saab95 extends Car {
     private boolean turboOn;
     
