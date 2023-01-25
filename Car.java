@@ -30,10 +30,10 @@ public abstract class Car implements Movable {
 
     public void move() {
         switch (direction) {
-            case UP: pos.y--; break;
-            case DOWN: pos.y++; break;
-            case LEFT: pos.x--; break;
-            case RIGHT: pos.x++; break;
+            case UP: pos.y-=currentSpeed; break;
+            case DOWN: pos.y+=currentSpeed; break;
+            case LEFT: pos.x-=currentSpeed; break;
+            case RIGHT: pos.x+=currentSpeed; break;
             default:
                 throw new Error("Unknown direction!");
         }
