@@ -144,13 +144,19 @@ public abstract class Car implements Movable {
 	    currentSpeed = 0;
     }
     
-    // TODO fix this method according to lab pm
+    /**
+    * increases the speed accoring the the argument amount which needs to be in the interval [0, 1]
+    * @param  amount  a number between 0-1
+    */
     public void gas(double amount) {
         amount = clamp(amount, 0, 1);
         incrementSpeed(amount);
     }
 
-    // TODO fix this method according to lab pm
+    /**
+    * decreases the speed accoring the the argument amount which needs to be in the interval [0, 1]
+    * @param  amount  a number between 0-1
+    */
     public void brake(double amount) {
         amount = clamp(amount, 0, 1);
         decrementSpeed(amount);
