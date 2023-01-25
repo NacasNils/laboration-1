@@ -8,6 +8,10 @@ public class Saab95 extends Car {
         turboOn = false;
     }
 
+    /**
+    * Returns the speed factor
+    * @return a double
+    */
     public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
@@ -22,10 +26,12 @@ public class Saab95 extends Car {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
+    /** Turn on turbo */
     public void setTurboOn() {
 	    turboOn = true;
     }
 
+    /** Turn off turbo */
     public void setTurboOff() {
 	    turboOn = false;
     }

@@ -35,6 +35,7 @@ public abstract class Car implements Movable {
     */
     public abstract void decrementSpeed(double amount);
 
+    /** Sets the proper instance variables for the car */
     Car(String name, Color col, int power, int nDoors) {
         this.modelName = name;
         this.color = col;
