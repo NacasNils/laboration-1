@@ -1,8 +1,8 @@
 import java.awt.*;
 
 /**
-* A specific car Saab 95, inherits from the class Car
-*/
+ * A specific car Saab 95, inherits from the class Car
+ */
 public class Saab95 extends Car {
     /**
      * variable that is true if Turbo is on, otherwise false.
@@ -18,9 +18,9 @@ public class Saab95 extends Car {
     }
 
     /**
-    * Returns the speed factor
-    * @return a double
-    */
+     * Returns the speed factor
+     * @return a double
+     */
     public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
@@ -45,12 +45,12 @@ public class Saab95 extends Car {
 
     /** Turn on turbo */
     public void setTurboOn() {
-	    turboOn = true;
+        turboOn = true;
     }
 
     /** Turn off turbo */
     public void setTurboOff() {
-	    turboOn = false;
+        turboOn = false;
     }
 
     public boolean getTurbo() {
