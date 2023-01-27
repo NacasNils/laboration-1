@@ -33,4 +33,6 @@ public class JUnitTest {
         car1.setTurboOn();
         assertEquals(car1.getTurbo(), true);
     }
+
+    public static void main(String[] args) {}
 }

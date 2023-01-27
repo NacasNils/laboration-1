@@ -14,6 +14,7 @@ public abstract class Car implements Movable {
     /** The car model name */
     protected String modelName;
 
+    /** enum for different directions the car can go */
     enum Dir {
         UP,
         DOWN,
@@ -21,7 +22,13 @@ public abstract class Car implements Movable {
         RIGHT
     }
 
+    /** gives current position of the car */
     private Point currentpos;
+
+    /**
+     * gives current position of car in the form of a java point
+     * @see Dir
+     */
     private Dir currentDir;
 
     /**
@@ -154,14 +161,21 @@ public abstract class Car implements Movable {
     }
 
     /**
-    * decreases the speed accoring the the argument amount which needs to be in the interval [0, 1]
-    * @param  amount  a number between 0-1
+    * decreases the speed accoring the argument amount which needs to be in the interval [0, 1]
+    * @param  amount  a number between 0 and 1
     */
     public void brake(double amount) {
         amount = clamp(amount, 0, 1);
-        decrementSpeed(amount);
     }
 
+    /**
+     * method makes sure that we never input a value outside the boundries.
+     * if higher than max value then it will return the max value, same for lower value.
+     * @param val input Value.
+     * @param min minimum Value the method is supposed to take.
+     * @param max maximum Value the method is supposed to take.
+     * @return
+     */
     public static double clamp(double val, double min, double max) {
         return Math.max(min, Math.min(max, val));
     }
