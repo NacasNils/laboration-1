@@ -16,6 +16,8 @@ public class Volvo240 extends Vehicle {
         super("Volvo240", color, 100, 4);
     }
 
+    public int getSize() { return 1; }
+
     /**
      * Returns the speed factor
      * @return a double

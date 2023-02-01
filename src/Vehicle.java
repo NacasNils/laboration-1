@@ -23,19 +23,23 @@ public abstract class Vehicle implements Movable {
     }
 
     /** gives current position of the car */
-    private Point currentpos;
+    protected Point currentpos;
 
     /**
      * gives current position of car in the form of a java point
      * @see Dir
      */
-    private Dir currentDir;
+    protected Dir currentDir;
 
     /**
      * Increments the speed
-     * @param  amount  the amount to increment the speed with
      */
     public abstract double speedFactor();
+
+    /**
+     * Describe the size of the car
+     */
+    public abstract int getSize();
 
     /** Sets the proper instance variables for the car */
     Vehicle(String name, Color col, int power, int nDoors) {

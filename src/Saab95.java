@@ -17,6 +17,8 @@ public class Saab95 extends Vehicle {
         turboOn = false;
     }
 
+    public int getSize() { return 1; }
+
     /**
      * Returns the speed factor
      * @return a double

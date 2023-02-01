@@ -10,6 +10,8 @@ public abstract class Truck extends Vehicle {
         super(modelName, color, power, 2);
     }
 
+    public boolean isBedRaised() { return bedAngle != 0; }
+
     /**
      * Returns the speed factor
      * @return a double
