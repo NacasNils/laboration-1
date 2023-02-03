@@ -1,41 +1,55 @@
 import java.awt.*;
-import java.util.Stack;
 
+/**
+ * Zis150 class that extends Truck
+ */
 public class Zis150 extends Truck {
-    public static final int maxCapacity = 3;
-    private int currentLoad = 0;
-    private Stack<Vehicle> bed = new Stack<>();
+    /**
+     * Storage that follows lifo structure, meant to represent the car carrying bed.
+     */
+    private Storage<Vehicle> bed = new Storage<>(4);
 
+
+    /**
+     * constructor for Zis150 class vehicle
+     * @param color
+     */
     public Zis150(Color color) {
         super("Zis 150", color, 960);
     }
 
-    public int getSize() { return 4; }
+    /**
+     * simple getter for the size of Zis150
+     * @return size of Zis150
+     */
+    public int getSize() { return 5; }
 
-    public boolean isHoldingLoad() {
-        return currentLoad > 0;
-    }
-
+    /**
+     * method for loading a vehicle with parameters set. will push the vehicle on stack and add to currentload
+     * @param v
+    */
     public void loadVehicle(Vehicle v) {
-        if (currentSpeed != 0) throw new Error("Cannot load when travelling!");
-        if (currentLoad == maxCapacity) throw new Error("Cannot load to a full bed!");
         if (isBedRaised()) throw new Error("Cannot load to a raised bed!");
-        if (v.getSize()+currentLoad < maxCapacity) {
-            bed.push(v);
-            currentLoad += v.getSize();
-        }
+        bed.load(v);
     }
 
+    /**
+     * method for unloading a vehicle with parameters set. will pop the vehicle from stack and decrease currentload correctly
+     * @return
+    */
     public Vehicle unloadVehicle() {
         if (currentSpeed != 0) throw new Error("Cannot unload when travelling!");
-        if (currentLoad == 0) throw new Error("Cannot unload from empty bed!");
         if (isBedRaised()) throw new Error("Cannot unload from a raised bed!");
-        Vehicle v = bed.pop();
-        currentLoad -= v.getSize();
-        return v;
+        return bed.unload();
     }
 
+
+
     @Override
+    /**
+     * special case of move that changes the position of the vehicles loaded on the truck to the trucks position.
+     * (updates the position)
+     */
     public void move() {
         switch (currentDir) {
             case UP: currentpos.y-=currentSpeed; break;

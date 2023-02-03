@@ -2,7 +2,7 @@ import java.awt.*;
 /**
  * Class Vehicle is an abstract class that a specific car should inherit from
  */
-public abstract class Vehicle implements Movable {
+public abstract class Vehicle implements Movable, Loadable {
     /** Number of doors on the car */
     protected int nrDoors;
     /** Engine power of the car */
@@ -179,6 +179,10 @@ public abstract class Vehicle implements Movable {
         decrementSpeed(amount);
     }
 
+    public boolean satisfiesConditionsForLoading() {
+        return (currentSpeed == 0);
+    }
+
     /**
      * method makes sure that we never input a value outside the boundries.
      * if higher than max value then it will return the max value, same for lower value.
@@ -191,10 +195,18 @@ public abstract class Vehicle implements Movable {
         return Math.max(min, Math.min(max, val));
     }
 
+    /**
+     * simple getter for current Direction of vehicle
+     * @return
+     */
     public Dir getCurrentDir(){
         return currentDir;
     }
 
+    /**
+     * simple getter for current Position of vehicle
+     * @return
+     */
     public Point getCurrentPos(){
         return currentpos;
     }

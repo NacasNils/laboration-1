@@ -1,5 +1,5 @@
 /**
- * interface which the Car class implements.
+ * interface which the Vehicle class implements.
  */
 interface Movable {
     void move();

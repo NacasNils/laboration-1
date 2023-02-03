@@ -16,6 +16,10 @@ public class Volvo240 extends Vehicle {
         super("Volvo240", color, 100, 4);
     }
 
+    /**
+     * simple getter for size of volvo 240
+     * @return size of Volvo240
+     */
     public int getSize() { return 1; }
 
     /**

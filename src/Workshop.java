@@ -1,28 +1,39 @@
 import java.util.*;
 
+/**
+ * class workshop
+ * @param <T> can only take in vehicle or classes that extend vehicle or its subclasses.
+ */
 public class Workshop<T extends Vehicle> {
-    List<T> storage = new ArrayList<>();
-    private final int maxCapacity;
-    private int currentLoad = 0;
 
+    /**
+     * Represents the space inside the workshop
+     */
+    private Storage<T> parkingBay;
+
+
+    /**
+     * constructor for workshop
+     * @param maxCapacity
+     */
     public Workshop(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
+        parkingBay = new Storage<>(maxCapacity);
     }
 
-    public int parkVehicle(T v) {
-        if (currentLoad == maxCapacity) throw new Error("Cannot park into a full workshop!");
-        if (v.getSize()+currentLoad < maxCapacity) {
-            storage.add(v);
-            currentLoad += v.getSize();
-            return storage.size()-1;
-        }
-        return -1;
+    /**
+     * method that parks vehicle of workshop choice
+     * @param v
+     */
+    public void parkVehicle(T v) {
+        parkingBay.load(v);
     }
 
-    public T unparkVehicle(int id) {
-        if (currentLoad == 0) throw new Error("Cannot unpark from an empty workshop!");
-        T v = storage.remove(id);
-        currentLoad -= v.getSize();
-        return v;
+    /**
+     * given the int ID it will return the vehicle associated with that id
+     * @param id
+     * @return vehicle of type T
+     */
+    public T unparkVehicle() {
+        return parkingBay.unload();
     }
 }
