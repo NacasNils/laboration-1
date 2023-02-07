@@ -10,7 +10,7 @@ import org.junit.Test;
 public class JUnitTest {
     @Test
     public void test_turbo() {
-        Saab95 Vehicle1 = new Saab95();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
         assertEquals(Vehicle1.getTurbo(), false);
         Vehicle1.setTurboOn();
         assertEquals(Vehicle1.getTurbo(), true);
@@ -18,7 +18,7 @@ public class JUnitTest {
 
     @Test
     public void test_dir() {
-        Saab95 Vehicle1 = new Saab95();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
         assertEquals(Vehicle1.getCurrentDir(), Vehicle.Dir.UP);
         Vehicle1.turnRight();
         assertEquals(Vehicle1.getCurrentDir(), Vehicle.Dir.RIGHT);
@@ -32,7 +32,7 @@ public class JUnitTest {
 
     @Test
     public void test_stationary() {
-        Saab95 Vehicle1 = new Saab95();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
         assertEquals(Vehicle1.getCurrentPos(), new Point (0,0) );
         Vehicle1.move();
         assertEquals(Vehicle1.getCurrentPos(), new Point (0,0) );
@@ -40,8 +40,8 @@ public class JUnitTest {
 
     @Test
     public void test_colors() {
-        Saab95 Vehicle1 = new Saab95();
-        Volvo240 Vehicle2 = new Volvo240();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
+        Volvo240 Vehicle2 = new Volvo240(Color.RED);
 
         Vehicle1.setColor(Color.GREEN);
         Vehicle2.setColor(Color.GRAY);
@@ -58,8 +58,8 @@ public class JUnitTest {
 
     @Test
     public void test_doors() {
-        Saab95 Vehicle1 = new Saab95();
-        Volvo240 Vehicle2 = new Volvo240();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
+        Volvo240 Vehicle2 = new Volvo240(Color.RED);
 
         assertEquals(Vehicle1.getNrDoors(), 2);
         assertEquals(Vehicle2.getNrDoors(), 4);
@@ -67,8 +67,8 @@ public class JUnitTest {
 
     @Test
     public void test_fake_input() {
-        Saab95 Vehicle1 = new Saab95();
-        Volvo240 Vehicle2 = new Volvo240();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
+        Volvo240 Vehicle2 = new Volvo240(Color.RED);
 
         Vehicle1.gas(0.0);
         Vehicle1.brake(0.0);
@@ -77,8 +77,8 @@ public class JUnitTest {
 
     @Test
     public void test_specs() {
-        Saab95 Vehicle1 = new Saab95();
-        Volvo240 Vehicle2 = new Volvo240();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
+        Volvo240 Vehicle2 = new Volvo240(Color.RED);
 
         assertEquals(Vehicle1.getColor(), Color.RED);
         assertEquals(Vehicle2.getColor(), Color.BLACK);
@@ -89,7 +89,7 @@ public class JUnitTest {
 
     @Test
     public void test_wrong_input_speed() {
-        Saab95 Vehicle1 = new Saab95();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
 
         Vehicle1.gas(-1);
         Vehicle1.move();
@@ -103,7 +103,7 @@ public class JUnitTest {
 
     @Test
     public void test_fullstop() {
-        Saab95 Vehicle1 = new Saab95();
+        Saab95 Vehicle1 = new Saab95(Color.RED);
 
         int i = 10;
         while (i > 0) {
