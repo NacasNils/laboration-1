@@ -1,4 +1,7 @@
+package Vehicles;
+
 import java.awt.*;
+import General.Storage;
 
 /**
  * Zis150 class that extends Truck

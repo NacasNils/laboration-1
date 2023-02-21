@@ -1,4 +1,6 @@
+package Vehicles;
 import java.awt.*;
+import General.*;
 /**
  * Class Vehicle is an abstract class that a specific car should inherit from
  */
@@ -15,7 +17,7 @@ public abstract class Vehicle implements Movable, Loadable {
     protected String modelName;
 
     /** enum for different directions the car can go */
-    enum Dir {
+    public static enum Dir {
         UP,
         DOWN,
         LEFT,
@@ -48,8 +50,8 @@ public abstract class Vehicle implements Movable, Loadable {
         this.enginePower = power;
         this.nrDoors = nDoors;
         this.currentSpeed = 0;
-        this.currentDir = Dir.UP;
-        this.currentpos = new Point (0,0);
+        this.currentDir = Dir.RIGHT;
+        this.currentpos = new Point(0, 0);
     }
 
     /**
@@ -63,6 +65,18 @@ public abstract class Vehicle implements Movable, Loadable {
             case DOWN: currentpos.y+=currentSpeed; break;
             case LEFT: currentpos.x-=currentSpeed; break;
             case RIGHT: currentpos.x+=currentSpeed; break;
+        }
+    }
+
+    public void clampPosition(int xmin, int xmax) {
+        if (currentpos.x < xmin) {
+            this.currentpos.x = 0;
+            this.turnRight();
+            this.turnRight();
+        } else if (currentpos.x + 115 > xmax) {
+            this.currentpos.x = xmax-115; // Måste flytta ut bilen från väggen
+            this.turnRight();             // annars kommer spelet tro att de finns en konstant kollision
+            this.turnRight();
         }
     }
 
@@ -99,6 +113,7 @@ public abstract class Vehicle implements Movable, Loadable {
      */
     public void incrementSpeed(double amount) {
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        // currentSpeed += speedFactor()*amount
     }
 
     /**

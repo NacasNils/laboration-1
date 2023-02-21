@@ -1,3 +1,4 @@
+package Vehicles;
 import java.awt.*;
 
 /**
@@ -27,7 +28,7 @@ public abstract class Truck extends Vehicle {
      * @return a double
      */
     public double speedFactor() {
-        return enginePower * 0.01;
+        return enginePower * 0.001; // 0.66
     }
 
     /**
