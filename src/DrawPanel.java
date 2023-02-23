@@ -1,19 +1,13 @@
-
 import java.awt.*;
-import java.util.ArrayList;
 import javax.swing.*;
+import java.util.ArrayList;
 
 import General.Drawable;
 
 // This panel represent the animated part of the view with the car images.
-
 public class DrawPanel extends JPanel {
     // A list of drawables
     ArrayList<Drawable> drawables = new ArrayList<>();
-
-    public void registerDrawable(Drawable d) {
-        drawables.add(d);
-    }
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
@@ -29,11 +23,12 @@ public class DrawPanel extends JPanel {
 
         for (int i = 0; i < drawables.size(); i++) {
             Drawable drawable = drawables.get(i);
-            int x = drawable.getCurrentPos().x;
-            int y = drawable.getCurrentPos().y;
+            int x = (int) drawable.getCurrentPos().getX();
+            int y = (int) drawable.getCurrentPos().getY();
             g.drawImage(drawable.getImage(), x, y + 100*i, null);
         }
-        /* g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y + 100, null);
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y + 200, null); */
+
+        // Clear the buffer
+        drawables.clear();
     }
 }

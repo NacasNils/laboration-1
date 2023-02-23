@@ -1,20 +1,16 @@
 package Vehicles;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import General.Drawable;
+import General.TurboEnabled;
 
-import java.io.IOException;
 import java.awt.*;
 
 /**
  * A specific car Saab 95, inherits from the class Car
  */
-public class Saab95 extends Vehicle implements Drawable {
+public class Saab95 extends Vehicle implements TurboEnabled {
     /**
      * variable that is true if Turbo is on, otherwise false.
      */
     private boolean turboOn;
-    private BufferedImage image;
 
     /**
      * constructor for Saab95 Class
@@ -22,9 +18,7 @@ public class Saab95 extends Vehicle implements Drawable {
     public Saab95(Color color) {
         super("Saab95", color, 125, 2);
         turboOn = false;
-        try {
-            image = ImageIO.read(Saab95.class.getResourceAsStream("../pics/Saab95.jpg"));
-        } catch (IOException ex) {ex.printStackTrace();}
+        image = loadImage("Saab95.jpg");
     }
 
     public int getSize() { return 1; }
@@ -52,9 +46,4 @@ public class Saab95 extends Vehicle implements Drawable {
     public boolean getTurbo() {
         return turboOn;
     }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
 }

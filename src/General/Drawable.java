@@ -1,8 +1,7 @@
 package General;
 import java.awt.image.BufferedImage;
-import java.awt.*;
 
 public interface Drawable {
-    Point getCurrentPos();
+    Vec2 getCurrentPos();
     BufferedImage getImage();
 }

@@ -1,10 +1,14 @@
 package Vehicles;
 import java.awt.*;
 import General.*;
+
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 /**
  * Class Vehicle is an abstract class that a specific car should inherit from
  */
-public abstract class Vehicle implements Movable, Loadable {
+public abstract class Vehicle implements Movable, Loadable, Drawable {
     /** Number of doors on the car */
     protected int nrDoors;
     /** Engine power of the car */
@@ -15,6 +19,7 @@ public abstract class Vehicle implements Movable, Loadable {
     protected Color color;
     /** The car model name */
     protected String modelName;
+    protected BufferedImage image;
 
     /** enum for different directions the car can go */
     public static enum Dir {
@@ -25,7 +30,7 @@ public abstract class Vehicle implements Movable, Loadable {
     }
 
     /** gives current position of the car */
-    protected Point currentpos;
+    protected Vec2 currentpos;
 
     /**
      * gives current position of car in the form of a java point
@@ -51,7 +56,9 @@ public abstract class Vehicle implements Movable, Loadable {
         this.nrDoors = nDoors;
         this.currentSpeed = 0;
         this.currentDir = Dir.RIGHT;
-        this.currentpos = new Point(0, 0);
+        this.currentpos = new Vec2(0, 0);
+
+        image = loadImage("placeholder.jpg");
     }
 
     /**
@@ -61,20 +68,20 @@ public abstract class Vehicle implements Movable, Loadable {
      */
     public void move() {
         switch (currentDir) {
-            case UP: currentpos.y-=currentSpeed; break;
-            case DOWN: currentpos.y+=currentSpeed; break;
-            case LEFT: currentpos.x-=currentSpeed; break;
-            case RIGHT: currentpos.x+=currentSpeed; break;
+            case UP: currentpos.setY(currentpos.getY() - currentSpeed); break;
+            case DOWN: currentpos.setY(currentpos.getY() + currentSpeed); break;
+            case LEFT: currentpos.setX(currentpos.getX() - currentSpeed); break;
+            case RIGHT: currentpos.setX(currentpos.getX() + currentSpeed); break;
         }
     }
 
     public void clampPosition(int xmin, int xmax) {
-        if (currentpos.x < xmin) {
-            this.currentpos.x = 0;
+        if (currentpos.getX() < xmin) {
+            this.currentpos.setX(1);
             this.turnRight();
             this.turnRight();
-        } else if (currentpos.x + 115 > xmax) {
-            this.currentpos.x = xmax-115; // Måste flytta ut bilen från väggen
+        } else if (currentpos.getX() + 115 > xmax) {
+            this.currentpos.setX(xmax-116); // Måste flytta ut bilen från väggen
             this.turnRight();             // annars kommer spelet tro att de finns en konstant kollision
             this.turnRight();
         }
@@ -171,7 +178,7 @@ public abstract class Vehicle implements Movable, Loadable {
         currentSpeed = 0.1;
     }
 
-    /** Starts the engine and sets the speed to 0 */
+    /** Stops the engine and sets the speed to 0 */
     public void stopEngine() {
         currentSpeed = 0;
     }
@@ -222,7 +229,18 @@ public abstract class Vehicle implements Movable, Loadable {
      * simple getter for current Position of vehicle
      * @return
      */
-    public Point getCurrentPos(){
+    public Vec2 getCurrentPos(){
         return currentpos;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public static BufferedImage loadImage(String name) {
+        try {
+            return ImageIO.read(Vehicle.class.getResourceAsStream("../pics/"+name));
+        } catch (IOException ex) {ex.printStackTrace();}
+        return null;
     }
 }

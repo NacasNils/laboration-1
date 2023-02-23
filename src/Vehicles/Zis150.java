@@ -55,10 +55,10 @@ public class Zis150 extends Truck {
      */
     public void move() {
         switch (currentDir) {
-            case UP: currentpos.y-=currentSpeed; break;
-            case DOWN: currentpos.y+=currentSpeed; break;
-            case LEFT: currentpos.x-=currentSpeed; break;
-            case RIGHT: currentpos.x+=currentSpeed; break;
+            case UP: currentpos.setY(currentpos.getY() - currentSpeed); break;
+            case DOWN: currentpos.setY(currentpos.getY() + currentSpeed); break;
+            case LEFT: currentpos.setX(currentpos.getX() - currentSpeed); break;
+            case RIGHT: currentpos.setX(currentpos.getX() + currentSpeed); break;
         }
 
         for (Vehicle vehicle : bed) {

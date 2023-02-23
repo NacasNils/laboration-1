@@ -1,14 +1,10 @@
 import javax.swing.*;
-
-import Vehicles.Saab95;
-import Vehicles.Scania;
-import Vehicles.Vehicle;
-import Vehicles.Volvo240;
+import General.TurboEnabled;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import Vehicles.*;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -17,75 +13,55 @@ import java.util.ArrayList;
  */
 
 public class CarController {
-    // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    // A list of cars, modify if needed
+    // A list of cars, the primary model holder
     ArrayList<Vehicle> cars = new ArrayList<>();
 
-    //methods:
+    // The delay (50 ms) corresponds to 20 updates a sec (hz)
+    private final int delay = 16;
+    // The timer is started with an listener (see below) that executes the statements
+    // each step between delays.
+    private Timer timer = new Timer(delay, e -> {
+        for (Vehicle car : cars) {
+            car.move();
+            car.clampPosition(0, 800);
+            frame.addDrawable(car);
+            frame.refresh();
+        }
+    });
 
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
+    public static void main(String[] args) { new CarController().init(); }
 
-        Volvo240 volvo = new Volvo240(Color.BLACK);
-        Scania scania = new Scania(Color.RED);
-        Saab95 saab = new Saab95(Color.GRAY);
-
+    void init() {
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+        frame = new CarView("CarSim 1.0", this);
 
-        cc.cars.add(volvo);cc.cars.add(scania);cc.cars.add(saab);
-        cc.frame.drawPanel.registerDrawable(volvo);
-        cc.frame.drawPanel.registerDrawable(scania);
-        cc.frame.drawPanel.registerDrawable(saab);
+        cars.add(new Volvo240(Color.BLACK));
+        cars.add(new Scania(Color.RED));
+        cars.add(new Saab95(Color.GRAY));
 
         // Start the timer
-        cc.timer.start();
+        timer.start();
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : cars) {
-                car.move();
-                car.clampPosition(0, 800);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-            }
-        }
-    }
+    void gasAll(int amount) { cars.forEach(car -> car.gas((double) amount/100)); }
 
-    // Calls the gas method for each car once
-    void gasAll(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Vehicle car : cars) {
-            car.gas(gas);
-        }
-    }
-
-    void brakeAll(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Vehicle car : cars) {
-            car.brake(brake);
-        }
-    }
+    void brakeAll(int amount) { cars.forEach(car -> car.brake((double) amount/100)); }
 
     void turboOn() {
-        cars.forEach(car -> {if (car instanceof Saab95) ((Saab95) car).setTurboOn();});
+        cars.forEach(car -> {if (car instanceof TurboEnabled) ((TurboEnabled) car).setTurboOn();});
     }
 
     void turboOff() {
-        cars.forEach(car -> {if (car instanceof Saab95) ((Saab95) car).setTurboOff();});
+        cars.forEach(car -> {if (car instanceof TurboEnabled) ((TurboEnabled) car).setTurboOff();});
+    }
+
+    void stopAllCars() {
+        cars.forEach(car -> { car.stopEngine(); });
+    }
+
+    void startAllCars() {
+        cars.forEach(car -> { car.startEngine(); });
     }
 }

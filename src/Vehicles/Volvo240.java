@@ -1,28 +1,20 @@
 package Vehicles;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import General.Drawable;
-import java.io.IOException;
 import java.awt.*;
 
 
 /**
  * A specific car Volvo 240, inherits from the class Car
  */
-public class Volvo240 extends Vehicle implements Drawable {
+public class Volvo240 extends Vehicle {
     /** An instance variable descibing the trim factor */
     public final static double trimFactor = 1.25;
-
-    private BufferedImage image;
 
     /**
      * constructor for volvo class
      */
     public Volvo240(Color color) {
         super("Volvo240", color, 100, 4);
-        try {
-            image = ImageIO.read(Volvo240.class.getResourceAsStream("../pics/Volvo240.jpg"));
-        } catch (IOException ex) {ex.printStackTrace();}
+        image = loadImage("Volvo240.jpg");
     }
 
     /**
@@ -38,9 +30,4 @@ public class Volvo240 extends Vehicle implements Drawable {
     public double speedFactor() {
         return enginePower * 0.01 * trimFactor;
     }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
 }
