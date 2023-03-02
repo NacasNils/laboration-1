@@ -1,8 +1,11 @@
+import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.*;
+import java.lang.Math;   
 import General.TurboEnabled;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import Vehicles.*;
 
@@ -17,6 +20,7 @@ public class CarController {
     CarView frame;
     // A list of cars, the primary model holder
     ArrayList<Vehicle> cars = new ArrayList<>();
+    Random random = new Random();
 
     // The delay (50 ms) corresponds to 20 updates a sec (hz)
     private final int delay = 16;
@@ -25,7 +29,7 @@ public class CarController {
     private Timer timer = new Timer(delay, e -> {
         for (Vehicle car : cars) {
             car.move();
-            car.clampPosition(0, 800);
+            car.clampPosition(0, CarView.X);
             frame.addDrawable(car);
             frame.refresh();
         }
@@ -63,5 +67,20 @@ public class CarController {
 
     void startAllCars() {
         cars.forEach(car -> { car.startEngine(); });
+    }
+
+    void addCar() {
+        Vehicle[] haystack = new Vehicle[] {
+            new Saab95(Color.RED),
+            new Volvo240(Color.RED),
+            new Scania(Color.RED)
+        };
+        int x = random.nextInt(3);
+        cars.add(haystack[x]);
+    }
+
+    void removeCar() {
+        int x = random.nextInt(cars.size());
+        cars.remove(x);
     }
 }

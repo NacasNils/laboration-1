@@ -53,6 +53,7 @@ public abstract class Truck extends Vehicle {
      */
     @Override
     public void gas(double amount) {
+        if (!engineOn) return;
         if (bedAngle != 0) return;
         amount = clamp(amount, 0, 1);
         incrementSpeed(amount);

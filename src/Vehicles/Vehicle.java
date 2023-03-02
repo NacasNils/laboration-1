@@ -21,6 +21,8 @@ public abstract class Vehicle implements Movable, Loadable, Drawable {
     protected String modelName;
     protected BufferedImage image;
 
+    protected boolean engineOn;
+
     /** enum for different directions the car can go */
     public static enum Dir {
         UP,
@@ -175,12 +177,12 @@ public abstract class Vehicle implements Movable, Loadable, Drawable {
 
     /** Starts the engine and sets the speed to 0.1 */
     public void startEngine() {
-        currentSpeed = 0.1;
+        engineOn = true;
     }
 
     /** Stops the engine and sets the speed to 0 */
     public void stopEngine() {
-        currentSpeed = 0;
+        engineOn = false;
     }
 
     /**
@@ -188,6 +190,7 @@ public abstract class Vehicle implements Movable, Loadable, Drawable {
      * @param  amount  a number between 0-1
      */
     public void gas(double amount) {
+        if (!engineOn) return;
         amount = clamp(amount, 0, 1);
         incrementSpeed(amount);
     }

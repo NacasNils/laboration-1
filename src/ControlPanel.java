@@ -12,8 +12,11 @@ public class ControlPanel extends JPanel {
     private JButton liftBedButton = new JButton("Scania Lift Bed");
     private JButton lowerBedButton = new JButton("Lower Lift Bed");
 
-    private JButton startButton = new JButton("Start all cars");
-    private JButton stopButton = new JButton("Stop all cars");
+    private JButton startEngineButton = new JButton("Start all car engines");
+    private JButton stopEngineButton = new JButton("Stop all car engines");
+
+    private JButton addCarButton = new JButton("Add car");
+    private JButton removeCarButton = new JButton("Remove car");
 
     // Constructor
     public ControlPanel(CarController cc) {
@@ -29,31 +32,35 @@ public class ControlPanel extends JPanel {
 
         // Grid buttons
         JPanel grid = new JPanel();
-        grid.setLayout(new GridLayout(2,4));
+        grid.setLayout(new GridLayout(2,5));
         grid.add(gasButton);
         grid.add(turboOnButton);
         grid.add(liftBedButton);
-        grid.add(startButton);
+        grid.add(startEngineButton);
+        grid.add(addCarButton);
         grid.add(brakeButton);
         grid.add(turboOffButton);
         grid.add(lowerBedButton);
-        grid.add(stopButton);
+        grid.add(stopEngineButton);
+        grid.add(removeCarButton);        
         
         this.add(gasPanel);
         this.add(grid);
 
         // start/stop button style
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
+        startEngineButton.setBackground(Color.blue);
+        startEngineButton.setForeground(Color.green);
+        stopEngineButton.setBackground(Color.red);
+        stopEngineButton.setForeground(Color.black);
 
         // actionListeners
         gasButton.addActionListener(e -> cc.gasAll(gasAmount));
         brakeButton.addActionListener(e -> cc.brakeAll(gasAmount));
         turboOnButton.addActionListener(e -> cc.turboOn());
         turboOffButton.addActionListener(e -> cc.turboOff());
-        stopButton.addActionListener(e -> cc.stopAllCars());
-        startButton.addActionListener(e -> cc.startAllCars());
+        stopEngineButton.addActionListener(e -> cc.stopAllCars());
+        startEngineButton.addActionListener(e -> cc.startAllCars());
+        addCarButton.addActionListener(e -> cc.addCar());
+        removeCarButton.addActionListener(e -> cc.removeCar());
     }
 }
