@@ -1,3 +1,4 @@
+// Factory method example
 void makeWorld() {
     Map mp = loadMap();
 
@@ -16,5 +17,5 @@ void makeWorld() {
         mp.spawn(n)
     }
 
-    mp.spawn(c)
+    mp.startTime(900) // 1400 max
 }

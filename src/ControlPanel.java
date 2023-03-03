@@ -62,5 +62,7 @@ public class ControlPanel extends JPanel {
         startEngineButton.addActionListener(e -> cc.startAllCars());
         addCarButton.addActionListener(e -> cc.addCar());
         removeCarButton.addActionListener(e -> cc.removeCar());
+        liftBedButton.addActionListener(e -> cc.raiseBed());
+        lowerBedButton.addActionListener((e -> cc.lowerBed()));
     }
 }

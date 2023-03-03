@@ -1,6 +1,6 @@
 import java.awt.*;
-
 import javax.swing.*;
+
 import General.Drawable;
 
 /**
@@ -10,7 +10,7 @@ import General.Drawable;
  * each of it's components.
  **/
 
-public class CarView extends JFrame {
+public class CarView extends JFrame implements SimulationObserver {
     public static final int X = 900;
     public static final int Y = 800;
 
@@ -43,11 +43,11 @@ public class CarView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void refresh() {
+    public void refreshState() {
         drawPanel.repaint();
     }
     
-    public void addDrawable(Drawable d) {
+    public void queueDraw(Drawable d) {
         drawPanel.drawables.add(d);
     }
 }

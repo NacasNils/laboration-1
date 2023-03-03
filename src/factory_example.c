@@ -1,3 +1,4 @@
+// Factory method example
 void makeWorld() {
     Map mp = loadMap();
 
