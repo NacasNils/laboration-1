@@ -27,8 +27,8 @@ public class Model {
         for (SimulationObserver ob : obs) ob.refreshState();
     });
 
-    public void addObserver(CarView v) { obs.add(v); }
-    public void removeObserver(CarView v) { obs.remove(v); }
+    public void addObserver(SimulationObserver v) { obs.add(v); }
+    public void removeObserver(SimulationObserver v) { obs.remove(v); }
 
     public Model() {
         cars.add(new Volvo240(Color.BLACK));
