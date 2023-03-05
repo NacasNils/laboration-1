@@ -62,14 +62,14 @@ public class Model {
         Vehicle[] haystack = new Vehicle[] {
                 new Saab95(Color.RED),
                 new Volvo240(Color.RED),
-                new Scania(Color.RED),
-                new Zis150(Color.BLACK)
+                new Scania(Color.RED)
         };
-        int x = random.nextInt(4);
+        int x = random.nextInt(haystack.length);
         cars.add(haystack[x]);
     }
 
     void removeCar() {
+        if (cars.size() == 0) return;
         int x = random.nextInt(cars.size());
         cars.remove(x);
     }

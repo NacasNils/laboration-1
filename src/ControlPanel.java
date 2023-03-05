@@ -7,10 +7,10 @@ public class ControlPanel extends JPanel {
 
     private JButton gasButton = new JButton("Gas");
     private JButton brakeButton = new JButton("Brake");
-    private JButton turboOnButton = new JButton("Saab Turbo on");
-    private JButton turboOffButton = new JButton("Saab Turbo off");
-    private JButton liftBedButton = new JButton("Scania Lift Bed");
-    private JButton lowerBedButton = new JButton("Lower Lift Bed");
+    private JButton turboOnButton = new JButton("Turbo on");
+    private JButton turboOffButton = new JButton("Turbo off");
+    private JButton liftBedButton = new JButton("Raise Bed");
+    private JButton lowerBedButton = new JButton("Lower Bed");
 
     private JButton startEngineButton = new JButton("Start all car engines");
     private JButton stopEngineButton = new JButton("Stop all car engines");
@@ -56,12 +56,16 @@ public class ControlPanel extends JPanel {
         // actionListeners
         gasButton.addActionListener(e -> cc.gasAll(gasAmount));
         brakeButton.addActionListener(e -> cc.brakeAll(gasAmount));
+
         turboOnButton.addActionListener(e -> cc.turboOn());
         turboOffButton.addActionListener(e -> cc.turboOff());
+
         stopEngineButton.addActionListener(e -> cc.stopAllCars());
         startEngineButton.addActionListener(e -> cc.startAllCars());
+
         addCarButton.addActionListener(e -> cc.addCar());
         removeCarButton.addActionListener(e -> cc.removeCar());
+
         liftBedButton.addActionListener(e -> cc.raiseBed());
         lowerBedButton.addActionListener((e -> cc.lowerBed()));
     }
